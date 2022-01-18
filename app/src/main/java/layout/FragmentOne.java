@@ -41,7 +41,7 @@ FragmentManager fragmentManager = new FragmentManager() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new FragmentOne();
-                FragmentTransaction ft = fragmentManager.beginTransaction();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fr_place,fragment);
                 ft.commit();
             }

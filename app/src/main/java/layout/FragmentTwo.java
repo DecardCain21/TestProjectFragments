@@ -16,13 +16,6 @@ import com.marat.hvatit.testprojectfragments.R;
 
 
 public class FragmentTwo extends Fragment {
-    FragmentManager fragmentManager = new FragmentManager() {
-
-        @Override
-        public FragmentTransaction beginTransaction() {
-            return super.beginTransaction();
-        }
-    };
 
 
     @Override
@@ -35,12 +28,12 @@ public class FragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_two, container, false);
-        Button button = (Button) view.findViewById(R.id.button2);
+        Button button =  view.findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new FragmentTwo();
-                FragmentTransaction ft = fragmentManager.beginTransaction();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fr_place,fragment);
                 ft.commit();
             }
