@@ -16,12 +16,6 @@ import com.marat.hvatit.testprojectfragments.R;
 
 
 public class FragmentOne extends Fragment {
-FragmentManager fragmentManager = new FragmentManager() {
-    @Override
-    public FragmentTransaction beginTransaction() {
-        return super.beginTransaction();
-    }
-};
 
 
 
