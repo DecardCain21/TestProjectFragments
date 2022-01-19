@@ -32,10 +32,7 @@ public class FragmentTwo extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new FragmentTwo();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fr_place,fragment);
-                ft.commit();
+
             }
         });
         return view;
