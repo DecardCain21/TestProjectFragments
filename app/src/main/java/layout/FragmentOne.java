@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.marat.hvatit.testprojectfragments.R;
 
@@ -28,15 +29,6 @@ public class FragmentOne extends Fragment {
     }
 
     onSomeEventListener someEventListener;
-
-    /*@Override
-    public void setArguments(@Nullable Bundle args) {
-        super.setArguments(args);
-        if (getActivity().getSupportFragmentManager() != null && isStateSaved()) {
-            throw new IllegalStateException("Fragment already added and state has been saved");
-        }
-    }*/
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -62,11 +54,13 @@ public class FragmentOne extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         Button button = (Button) view.findViewById(R.id.button);
+        EditText editText = (EditText) view.findViewById(R.id.eText);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("TAG","someEvent in Fragment1");
-                someEventListener.someEvent("Chlen");
+                someEventListener.someEvent(String.valueOf(editText.getText()));
+
             }
         });
         return view;
