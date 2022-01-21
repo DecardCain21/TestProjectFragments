@@ -18,18 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.marat.hvatit.testprojectfragments.IonSomeEventListener;
 import com.marat.hvatit.testprojectfragments.R;
 
 import java.util.Objects;
 
 
 public class FragmentOne extends Fragment {
-
-    public interface IonSomeEventListener {
-        void someEvent(String s);
-    }
-
-
+    boolean fr1 = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,10 +37,10 @@ public class FragmentOne extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_one, container, false);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        Button button = (Button) view.findViewById(R.id.button);
-        EditText editText = (EditText) view.findViewById(R.id.eText);
-        if(getArguments()!=null) {
+        TextView textView = view.findViewById(R.id.textView);
+        Button button = view.findViewById(R.id.button);
+        EditText editText = view.findViewById(R.id.eText);
+        if (getArguments() != null) {
             String args = getArguments().getString("tagfrone");
             textView.setText(args);
         }
@@ -53,10 +49,10 @@ public class FragmentOne extends Fragment {
             public void onClick(View view) {
                 String s = editText.getText().toString();
                 Activity activity = requireActivity();
-                try{
-                    ((IonSomeEventListener)activity).someEvent(s);
-                }catch (Exception e){
-                    Log.e("Tag","ERROR");
+                try {
+                    ((IonSomeEventListener) activity).someEvent(s, fr1);
+                } catch (Exception e) {
+                    Log.e("Tag", "ERROR");
                 }
 
             }

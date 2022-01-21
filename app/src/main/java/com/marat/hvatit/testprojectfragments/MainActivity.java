@@ -12,7 +12,9 @@ import android.widget.TextView;
 import layout.FragmentOne;
 import layout.FragmentTwo;
 
-public class MainActivity extends AppCompatActivity implements FragmentOne.IonSomeEventListener {
+public class MainActivity extends AppCompatActivity implements IonSomeEventListener {
+    FragmentTransaction ft;
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,33 +24,33 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.IonSo
     }
 
     @Override
-    public void someEvent(String somf) {
+    public void someEvent(String somf, boolean b) {
         //вызов Менеджера для нахождения фрагмента в контейнере(по дефолту стоит фрагмент 1
         //#2
-        Bundle bundle = new Bundle();
-        FragmentTransaction ft;
-        if(bundle.containsKey("tagfrtwo")||bundle.isEmpty()){
+        if (b) {
+            Log.e("Tag", "THIS FUCKIN B == TRUE");
+        }
+        if (!b) {
+            Log.e("Tag", "THIS FUCKIN B == FALSE");
+        }
+
+        ft = getSupportFragmentManager().beginTransaction();
+        if (b) {
             Log.e("TAG", "This is fuckin work dudeeee2");
             bundle.putString("tagfrone", somf);
             Fragment fragment1 = new FragmentOne();
             fragment1.setArguments(bundle);
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.addToBackStack(null);
             ft.replace(R.id.fr_place, fragment1);
-            ft.commit();
-            bundle.remove("tagfrtwo");
         }
-        if (bundle.containsKey("tagfrone")) {
+        if (!b) {
             Log.e("TAG", "This is fuckin work dudeeee1");
             bundle.putString("tagfrtwo", somf);
             Fragment fragment2 = new FragmentTwo();
             fragment2.setArguments(bundle);
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.addToBackStack(null);
             ft.replace(R.id.fr_place, fragment2);
-            ft.commit();
-            bundle.remove("tagfrone");
         }
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 }
