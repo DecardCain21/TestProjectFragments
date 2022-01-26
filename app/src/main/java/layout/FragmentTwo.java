@@ -22,7 +22,6 @@ import com.marat.hvatit.testprojectfragments.R;
 
 
 public class FragmentTwo extends Fragment {
-    boolean fr2 = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,14 +41,11 @@ public class FragmentTwo extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(fr2 = false){
-                    Log.e("Tag", "ERROR");
-                }
                 Log.e("Tag", "I M HERE!");
                 String s = editText.getText().toString();
                 Activity activity = requireActivity();
                 try {
-                    ((IonSomeEventListener) activity).someEvent(s,fr2);
+                    ((IonSomeEventListener) activity).someEvent(s,true);
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR");
                 }

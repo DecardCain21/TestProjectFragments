@@ -25,7 +25,6 @@ import java.util.Objects;
 
 
 public class FragmentOne extends Fragment {
-    boolean fr1 = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class FragmentOne extends Fragment {
                 String s = editText.getText().toString();
                 Activity activity = requireActivity();
                 try {
-                    ((IonSomeEventListener) activity).someEvent(s, fr1);
+                    ((IonSomeEventListener) activity).someEvent(s, false);
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR");
                 }
