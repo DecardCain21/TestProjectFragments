@@ -35,10 +35,10 @@ public class FragmentTwo extends Fragment {
         View view = inflater.inflate(R.layout.fragment_two, container, false);
         EditText editText = view.findViewById(R.id.eText2);
         TextView textView = view.findViewById(R.id.textView2);
-        Button button = view.findViewById(R.id.button2);
+        Button button2 = view.findViewById(R.id.button2);
         String args = getArguments().getString("tagfrtwo");
         textView.setText(args);
-        button.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("Tag", "I M HERE!");
