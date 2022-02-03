@@ -49,7 +49,7 @@ public class FragmentOne extends Fragment {
                 String s = editText.getText().toString();
                 Activity activity = requireActivity();
                 try {
-                    ((IonSomeEventListener) activity).someEvent(s, false);
+                    ((IonSomeEventListener) activity).someEvent(s, FragmentType.FRAGMENT_FIRST);
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR");
                 }

@@ -41,11 +41,10 @@ public class FragmentTwo extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Tag", "I M HERE!");
                 String s = editText.getText().toString();
                 Activity activity = requireActivity();
                 try {
-                    ((IonSomeEventListener) activity).someEvent(s,true);
+                    ((IonSomeEventListener) activity).someEvent(s,FragmentType.FRAGMENT_TWO);
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR");
                 }

@@ -8,58 +8,53 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.Objects;
 
 import layout.FragmentOne;
 import layout.FragmentTwo;
+import layout.FragmentType;
 
 public class MainActivity extends AppCompatActivity implements IonSomeEventListener {
-    FragmentTransaction ft;
-    Bundle bundle = new Bundle();
-    int count = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Fragment first = new FragmentOne();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fr_place, first)
+                .addToBackStack("StackOne")
+                .commit();
 
     }
 
 
     @Override
-    public void someEvent(String somf, boolean b) {
-        //вызов Менеджера для нахождения фрагмента в контейнере(по дефолту стоит фрагмент 1
-        //#2
-        if (b) {
-            Log.e("Tag", "THIS FUCKIN B == TRUE");
-        }
-        if (!b) {
-            Log.e("Tag", "THIS FUCKIN B == FALSE");
-        }
-
-        ft = getSupportFragmentManager().beginTransaction();
-        if (b) {
-            bundle.putString("tagfrone", somf);
-            Fragment fragment1 = new FragmentOne();
-            fragment1.setArguments(bundle);
-            ft.replace(R.id.fr_place, fragment1);
-        }
-        if (!b) {
-            bundle.putString("tagfrtwo" + (count), somf);
-            Log.e("Message","tagfrtwo" + (count));
-            count++;
-            if (!ft.isEmpty()) {
-                Fragment temp = getSupportFragmentManager().findFragmentByTag("tagfrtwo" + (count));
-                ft.remove(temp);
+    public void someEvent(String somf, FragmentType type) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            Log.e("BackStack:", "Clear backstack!");
+            for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); i++) {
+                getSupportFragmentManager().popBackStack();
             }
-            Fragment fragment2 = new FragmentTwo();
-            fragment2.setArguments(bundle);
-            ft.replace(R.id.fr_place, fragment2);
-            ft.addToBackStack(null);
         }
+        Fragment current;
+        Bundle bundle = new Bundle();
+        if (type == FragmentType.FRAGMENT_TWO) {
+            bundle.putString("tagfrone", somf);
+            current = new FragmentOne();
+        } else {
+            bundle.putString("tagfrtwo", somf);
+            current = new FragmentTwo();
+        }
+        current.setArguments(bundle);
 
-        ft.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fr_place, current)
+                .addToBackStack("StackOne")
+                .commit();
+
+        Log.e("BackStack:", Integer.toString(getSupportFragmentManager().getBackStackEntryCount()));
     }
 
 }
